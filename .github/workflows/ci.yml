@@ -1,0 +1,31 @@
+name: Java CI Testing
+
+# When should the workflow execute?
+on:
+  push:
+  pull_request:
+
+# Jobs to perform
+jobs:
+
+  build-and-test:
+
+    # Select operating system
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Step 1: Download project code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Install Java
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # Step 3: Run tests using Maven
+      - name: Build and Test
+        run: mvn clean test
